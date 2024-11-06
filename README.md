@@ -1,4 +1,4 @@
-Membrii echipei:
-Bursuc Eduarda
-Manolache Mihai
-Amihaesii Simona
+#Membrii echipei:
+#Bursuc Eduarda
+#Manolache Mihai
+#Amihaesii Simona
