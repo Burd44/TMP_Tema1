@@ -20,8 +20,8 @@ public class PetersonImprovedAlgorithm extends PetersonAlgorithm{
 
                 for (int k = 0; k < n; k++) {
                     // Dacă alt thread k are prioritate mai mare și nu a avut acces recent
-                    if (k != i && level.get(k) >= L && victim.get(L) == i &&
-                            accessCount.get(i) > accessCount.get(k)) {
+                    if (k != i && level.get(k) >= L && (victim.get(L) == i ||
+                            accessCount.get(i) > accessCount.get(k))) {
                         waiting = true;
                         break;
                     }

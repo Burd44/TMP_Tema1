@@ -1,11 +1,11 @@
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.ArrayList;
 
 public class Main {
 
     private static final int NUM_THREADS = 10;
-    private static final int NUM_ACCESSES = 5; // Number of accesses per thread
+    private static final int NUM_ACCESSES = 5;
 
     public static void main(String[] args) throws InterruptedException {
         System.out.println("** Important Note **");
@@ -22,8 +22,8 @@ public class Main {
     }
 
     public static void runAlgorithm(PetersonAlgorithm algorithm) throws InterruptedException {
-        List<Integer> cycleArray = new CopyOnWriteArrayList<>(); // Using thread-safe list
-        AtomicInteger cycleCounter = new AtomicInteger(0); // Counts how many times threads entered critical section
+        List<Integer> cycleArray = new ArrayList<>();
+        AtomicInteger cycleCounter = new AtomicInteger(0);
 
         Thread[] threads = new Thread[NUM_THREADS];
 
@@ -35,17 +35,15 @@ public class Main {
 
                     // Critical section
                     try {
-                        Thread.sleep(10);
+                        Thread.sleep(1);
                     } catch (InterruptedException e) {
                         Thread.currentThread().interrupt();
                     }
 
-                    synchronized (cycleArray) {
-                        if (cycleArray.contains(threadId)) {
+                    if (cycleArray.contains(threadId)) {
                             printCycle(cycleCounter.incrementAndGet(), cycleArray);
                             cycleArray.clear();
                         }
-                    }
                     cycleArray.add(threadId);
 
                     algorithm.unlock(threadId);
